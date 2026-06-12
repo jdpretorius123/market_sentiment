@@ -22,7 +22,7 @@ The dashboard is a static site on GitHub Pages that loads three JSON files and r
 | Chart | What it Shows | How to Read It |
 | :---- | :---- | :---- |
 | Streamgraph | Article volume over time, stacked by sentiment band | Band thickness denotes the number of articles per day, and the color reflects the tone: positive, neutral, and negative |
-| Radar Charts | Each stock's positive, neutral, and negative coverage | There is one radar chart per company. All radar charts use the same scale, and are read by comparing their shapes across the grid. |
+| Lollipop Charts | Each stock's net-sentiment coverage | Each lollipop shows a company's net sentiment, which is the share of positive coverage minus negative coverage. Companies are ranked from most net-positive at the top.  |
 | Force-directed Network Graph | Ticker-to-topic co-occurrence | Edges link a company to topics is discussed with, node size reflects article volume, and color is equal to average sentiment |
 
 # Analytical Caveats
@@ -50,7 +50,7 @@ flowchart TD
 
     %% Visualizations
     D3 --> SG["Streamgraph<br/>(sentiment over time)"]
-    D3 --> RAD["Small-multiple radars<br/>(per-ticker tone profile)"]
+    D3 --> LOL["Net-sentiment lollipop<br/>(per-ticker tone)"]
     D3 --> NET["Force-directed network<br/>(ticker–topic)"]
 ```
 Data is one directional. Each stage (acquisition -> ETL -> export) sits on shared leaf layers (storage I/O, data-contract schemes, config), so every phase is independently testable and the dependencies never cycle.
@@ -79,7 +79,7 @@ Data is one directional. Each stage (acquisition -> ETL -> export) sits on share
 - python-dotenv — environment / secret loading
 
 ## Visualization
-- D3.js v7 — streamgraph, small-multiple radars, force-directed network
+- D3.js v7 — streamgraph, net-sentiment lollipop, force-directed network
 - Font Awesome — icons
 
 ## Tooling
@@ -146,7 +146,7 @@ graph LR
     D2 --- D2A("📄 style.css")
     Docs --- D3["📁 js/"]
     D3 --- D3A("📄 streamgraph.js")
-    D3 --- D3B("📄 radar.js")
+    D3 --- D3B("📄 lollipop.js")
     D3 --- D3C("📄 network.js")
     Docs --- D4["📁 data/"]
     D4 --- D4A("📄 *.json<br/>(exported chart data)")
@@ -232,8 +232,6 @@ Then open `docs/index.html` locally, or visit the deployed GitHub Pages URL.
     - Join tone against price movements to close the loop on the original motivating question.
 - Lift-weighted network edges
     - Weight ticker–topic edges by lift, not raw count, to surface distinctive associations.
-- Emotion radar
-    - Add an emotion lexicon for a true emotion (not valence) breakdown.
 - Parquet in the lake
     - Switch R2 storage from JSON to parquet once volume justifies it.
 

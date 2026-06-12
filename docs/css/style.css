@@ -52,7 +52,7 @@
     --color-pos: #2ca02c;   /* streamgraph positive  */
     --color-neu: #9e9e9e;   /* streamgraph neutral   */
     --color-neg: #d62728;   /* streamgraph negative  */
-    --color-accent: #4682b4; /* radar steelblue       */
+    --color-accent: #4682b4; /* accent steelblue       */
   }
 
   /* 3. Layout container -------------------------------------- */
@@ -112,6 +112,7 @@
   header > ul {
     display: flex;
     flex-wrap: wrap;
+    justify-content: center;
     gap: 0.5rem;
     margin-block: 0 calc(var(--space) * 1.5);
   }
@@ -152,12 +153,12 @@
     aspect-ratio: 4 / 3;   /* matches viewBox 800x600 */
   }
 
-  /* Radar --------------------------------------------------- */
-  #radar-chart {
+  /* Lollipop -------------------------------------------------- */
+  #lollipop-chart {
     text-align: center;
   }
 
-  #radar-chart svg {
+  #lollipop-chart svg {
     max-width: 100%;
     height: auto;
   }
@@ -184,6 +185,7 @@
   footer ul {
     padding-left: 0;
     display: flex;
+    justify-content: center;
     flex-wrap: wrap;
     gap: 0.75rem 1.25rem;
   }

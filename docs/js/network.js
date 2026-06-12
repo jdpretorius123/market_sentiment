@@ -177,7 +177,7 @@ d3.json("data/network_data.json").then(data => {
     // Creating a group for the color legend
     const colorLegendGroup = svg.append("g")
         .attr("class", "color-legend")
-        .attr("transform", `translate(580, ${h - 40})`); // Positions the legend in the top-right
+        .attr("transform", `translate(580, ${h - 40})`); // Positions the legend in the bottom-right
     
     // Draws the legend and fills it with the color gradient
     colorLegendGroup.append("rect")
@@ -219,7 +219,7 @@ d3.json("data/network_data.json").then(data => {
     // Creating a group for the size legend
     const sizeLegendGroup = svg.append("g")
         .attr("class", "size-legend")
-        .attr("transform", `translate(40, ${h - 40})`); // Positions the legend in the top-left
+        .attr("transform", `translate(40, ${h - 40})`); // Positions the legend in the bottom-left
     
     // Binds the reference sizes and creates a sub-group for each sizeLegend item
     const sizeItem = sizeLegendGroup.selectAll(".size-item")

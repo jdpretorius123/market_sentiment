@@ -41,7 +41,7 @@
         I/O, data-contract schemas, and config) so each phase is independently testable and the dependencies
         flow in one direction. The final stage aggregates the warehouse into small static JSON files that a
         D3.js dashboard renders as three interactive visualizations: a streamgraph of sentiment over time,
-        small-multiple radar charts comparing each company's tone profile, and a force-directed graph of
+        a net-sentiment lollipop chart ranking each company's tone, and a force-directed graph of
         ticker-to-topic relationships. The result is a GitHub-Pages-hostable dashboard that turns thousands 
         of raw news articles into a clear, at-a-glance read on how the market is talking about a select set 
         of tech stocks.  
@@ -61,12 +61,11 @@
         <span class="neg">negative</span> tone.
       </p>
 
-      <h2>Per-company sentiment profile</h2> 
-      <section><div id="radar-chart"></div></section>
+      <h2>Net Sentiment by Company</h2> 
+      <section><div id="lollipop-chart"></div></section>
       
-      <p>Each radar shows one ticker's mix of <span class="pos">positive</span>, <span class="neu">neutral</span>, and
-        <span class="neg">negative</span> coverage; the top cell is a scale guide.
-      </p>
+      <p>Each lollipop shows a company's <strong>net sentiment</strong> &mdash; the share of <span class="pos">positive</span>
+        coverage minus <span class="neg">negative</span> coverage. Companies are ranked from most net-positive at the top.</p>
 
       <h2>Ticker-to-topic relationships</h2>
       <section><div id="network-chart"></div></section>
@@ -78,7 +77,7 @@
     </main>
 
     <footer>
-      <h3>Social Media</h3>
+      <h3>Contact Info &amp; Resources</h3>
       <ul>
         <li><a href="https://github.com/jdpretorius123" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><i class="fa-brands fa-github"></i></a></li>
         <li><a href="https://x.com/jdpretorius_" target="_blank" rel="noopener noreferrer" aria-label="X"><i class="fa-brands fa-x-twitter"></i></a></li>
@@ -90,7 +89,7 @@
     </footer>
 
     <script type="module" src="js/streamgraph.js"></script>
-    <script type="module" src="js/radar.js"></script>
+    <script type="module" src="js/lollipop.js"></script>
     <script type="module" src="js/network.js"></script>
 
   </body>

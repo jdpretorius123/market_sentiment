@@ -3,7 +3,7 @@
 Functions:
     write_json(): Writes BigQuery data to JSON.
     prep_streamgraph(): Prepares data for a streamgraph.
-    prep_radar(): Prepares data for a per-ticker radar chart.
+    prep_lollipop(): Prepares data for a lollipop chart.
     prep_network(): Prepares data for a force-directed network graph.
 """
 
@@ -96,13 +96,13 @@ def prep_streamgraph(bq_table_ref: str, bq_project: str) -> list[dict[str, Any]]
     return rows
 
 
-def prep_radar(
+def prep_lollipop(
     bq_table_ref: str, bq_project: str, tickers: list[str]
 ) -> list[dict[str, Any]]:
-    """Prepares data for a per-ticker radar chart.
+    """Prepares data for a lollipop chart.
 
-    The per-ticker average is calculated for each VADER score (positive, neutral,
-    and negative). These averages are used to create a radar chart downstream.
+    Each company's net sentiment is calculated by subtracting negative coverage from 
+    positive coverage. Net sentiment is used to create a lollipop chart downstream.
 
     Args:
         bq_table_ref (str): Fully qualified table reference to BQ table.
@@ -110,8 +110,7 @@ def prep_radar(
         tickers (list[str]): List of pre-determined tickers to track.
 
     Returns:
-        list[dict[str, Any]]: Average VADER scores (positive, negative, and neutral) per
-            ticker.
+        list[dict[str, Any]]: Each company's net sentiment.
 
     Raises:
         RuntimeError: Raised if data export from BigQuery fails.
@@ -120,17 +119,15 @@ def prep_radar(
     query = f"""
       SELECT
           ticker,
-          AVG(vader_pos) AS pos,
-          AVG(vader_neg) AS neg,
-          AVG(vader_neu) AS neu
+          AVG(vader_pos) - AVG(vader_neg) AS net
       FROM `{bq_table_ref}`
       WHERE ticker IN ({ticker_filter})
       GROUP BY ticker
-      ORDER BY ticker;
+      ORDER BY net DESC;
     """
     status, rows = bq_reader(bq_project, query)
     if status == "Failure":
-        raise RuntimeError(f"Radar data export failed: {rows}")
+        raise RuntimeError(f"Lollipop data export failed: {rows}")
     return rows
 
 

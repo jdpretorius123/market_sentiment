@@ -7,8 +7,8 @@ from typing import Any
 
 from market_sentiment.config import BQ_PROJECT, BQ_TABLE_REF, TICKERS
 from market_sentiment.export.build_chart_data import (
+    prep_lollipop,
     prep_network,
-    prep_radar,
     prep_streamgraph,
     write_json,
 )
@@ -36,7 +36,7 @@ def main() -> None:
     try:
         file_map: dict[str, Any] = {
             "streamgraph_data.json": prep_streamgraph(BQ_TABLE_REF, BQ_PROJECT),
-            "radar_data.json": prep_radar(BQ_TABLE_REF, BQ_PROJECT, TICKERS),
+            "lollipop_data.json": prep_lollipop(BQ_TABLE_REF, BQ_PROJECT, TICKERS),
             "network_data.json": prep_network(BQ_TABLE_REF, BQ_PROJECT, TICKERS),
         }
     except RuntimeError as exc:
@@ -47,9 +47,9 @@ def main() -> None:
         write_json(payload, name)
 
     logger.info(
-        "Run Summary: streamgraph=%s, radar=%s, nodes=%s, links=%s",
+        "Run Summary: streamgraph=%s, lollipop=%s, nodes=%s, links=%s",
         len(file_map["streamgraph_data.json"]),
-        len(file_map["radar_data.json"]),
+        len(file_map["lollipop_data.json"]),
         len(file_map["network_data.json"]["nodes"]),
         len(file_map["network_data.json"]["links"]),
     )
