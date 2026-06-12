@@ -102,7 +102,7 @@ Data is one directional. Each stage (acquisition -> ETL -> export) sits on share
 The warehouse is modeled as a single denormalized "One Big Table" (OBT), article_sentiment: one row per article-ticker mention, with nested topics and authors. This lets the analytical queries run without joins, and is a natural fit for read-heavy, append-only analytical data.
 
 | Column | Type | Mode | Note |
-| :---: | :---: | :---: | :---: |
+| :---- | :---- | :---- | :---- |
 | row_id | STRING | REQUIRED | SHA-256 of the natural key; the MERGE join key |
 | provider | STRING | REQUIRED | alpha_vantage or newsapi |
 | ticker | STRING | REQUIRED ||
