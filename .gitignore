@@ -170,8 +170,8 @@ __marimo__/
 
 # Data Caches
 data/
-!dashboard/data
-!dashboard/data/*.json
+!docs/data
+!docs/data/*.json
 
 # Logs
 log/

@@ -1,7 +1,7 @@
 # Market Sentiment and Real-Time Finanical Intelligence
 *An end-to-end pipeline that turns financial news, received as raw API payloads, into an interactive D3.js dashboard that gives a glance at how the market is perceiving tech stocks.*
 
-[Live dashboard](https://jdpretorius123.github.io/financial_portfolio/market_sentiment/dashboard/)
+[Live dashboard](https://jdpretorius123.github.io/market_sentiment/docs/)
 
 # Overview
 Financial-news articles are a great source of data! Volume and tone of coverage can be used to determine how the market is talking about a company at a given moment. This project ingests financial-news for tech stocks, scores the tone of every article, and compiles the results into interactive visualizations that answer:
@@ -94,9 +94,9 @@ Data is one directional. Each stage (acquisition -> ETL -> export) sits on share
 
 2. ETL (src/market_sentiment/etl/) — reads the raw JSON from R2, validates every payload against pydantic contracts, scores each article's tone with VADER, normalizes both providers into one unified row shape, deduplicates, and loads the result into BigQuery via a staging table and MERGE.
 
-3. Export (src/market_sentiment/export/) — runs three aggregating SQL queries against the warehouse and writes small static JSON files (dashboard/data/*.json). There is one file per chart. Aggregating in SQL keeps the browser payloads tiny.
+3. Export (src/market_sentiment/export/) — runs three aggregating SQL queries against the warehouse and writes small static JSON files (docs/data/*.json). There is one file per chart. Aggregating in SQL keeps the browser payloads tiny.
 
-4. Dashboard (dashboard/) — three D3 v7 modules load their JSON and render the charts. Pure static front-end that is deployable to GitHub Pages as-is.
+4. Dashboard (docs/) — three D3 v7 modules load their JSON and render the charts. Pure static front-end that is deployable to GitHub Pages as-is.
 
 # Data model
 The warehouse is modeled as a single denormalized "One Big Table" (OBT), article_sentiment: one row per article-ticker mention, with nested topics and authors. This lets the analytical queries run without joins, and is a natural fit for read-heavy, append-only analytical data.
@@ -129,7 +129,7 @@ graph LR
     %% Level 1
     Root --- F1("📄 pyproject.toml<br/>(build config, deps, tool config)")
     Root --- Src["📁 src/market_sentiment/"]
-    Root --- Dash["📁 dashboard/<br/>(HTML / CSS / D3 front-end)"]
+    Root --- Dash["📁 docs/<br/>(HTML / CSS / D3 front-end)"]
     Root --- Tests["📁 tests/<br/>(pytest)"]
 
     %% Src contents
@@ -198,10 +198,10 @@ The pipeline runs as a monthly batch, one stage at a time:
 ```python
 python -m market_sentiment.acquisition.main   # fetch -> R2
 python -m market_sentiment.etl.main           # R2 -> validate -> score -> BigQuery
-python -m market_sentiment.export.main        # BigQuery -> dashboard/data/*.json
+python -m market_sentiment.export.main        # BigQuery -> docs/data/*.json
 ```
 
-Then open dashboard/index.html locally, or visit the deployed GitHub Pages URL.
+Then open `docs/index.html` locally, or visit the deployed GitHub Pages URL.
 
 # Design decisions & trade-offs
 - One Big Table over a star schema

@@ -13,7 +13,7 @@ from typing import Any
 
 from market_sentiment.storage.bq_reader import bq_reader
 
-OUTPUT_DIR = Path(__file__).resolve().parents[3] / "dashboard" / "data"
+OUTPUT_DIR = Path(__file__).resolve().parents[3] / "docs" / "data"
 
 MIN_EDGE_WEIGHT = 2
 
