@@ -1,11 +1,10 @@
 # Market Sentiment and Real-Time Finanical Intelligence
 *An end-to-end pipeline that turns financial news, received as raw API payloads, into an interactive D3.js dashboard that gives a glance at how the market is perceiving tech stocks.*
 
-![Live dashboard] (https://jdpretorius123.github.io/financial_portfolio/market_sentiment/dashboard/)
+(Live dashboard)(https://jdpretorius123.github.io/financial_portfolio/market_sentiment/dashboard/)
 
 # Overview
 Financial-news articles are a great source of data! Volume and tone of coverage can be used to determine how the market is talking about a company at a given moment. This project ingests financial-news for tech stocks, scores the tone of every article, and compiles the results into interactive visualizations that answer:
-
 - How does coverage volume and tone fluctuate over time?
 - How does sentiment change from one company to the next?
 - Which topics is each company associated with?
@@ -21,7 +20,7 @@ The dashboard is a static site on GitHub Pages that loads three JSON files and r
 
 ## The Visualizations
 | Chart | What it Shows | How to Read It |
-| :---: | :---: | :---: |
+| :---- | :---- | :---- |
 | Streamgraph | Article volume over time, stacked by sentiment band | Band thickness denotes the number of articles per day, and the color reflects the tone: positive, neutral, and negative |
 | Radar Charts | Each stock's positive, neutral, and negative coverage | There is one radar chart per company. All radar charts use the same scale, and are read by comparing their shapes across the grid. |
 | Force-directed Network Graph | Ticker-to-topic co-occurrence | Edges link a company to topics is discussed with, node size reflects article volume, and color is equal to average sentiment |
@@ -116,8 +115,7 @@ The warehouse is modeled as a single denormalized "One Big Table" (OBT), article
 | topics | RECORD <topic, relevance_score> | REPEATED | Alpha Vantage only |
 | vader_compound / _pos / _neu / _neg | FLOAT64 | REQUIRED | VADER scores |
 
-
-## Idempotency
+<h2>Idempotency</h2>
 Loads are not naive inserts. Each batch lands in a uniquely named staging table, then a MERGE on row_id inserts only rows the target doesn't already have, so re-running the same month never
 duplicates data. BigQuery does not enforce primary keys, so this is enforced explicitly in the
 loader.
@@ -155,24 +153,27 @@ graph LR
 ```
 
 # Setup
-## Prerequisites
+<h2>Prerequisites</h2>
 - Python 3.12.0 (via pyenv)
 - Cloudflare R2 bucket 
 - Google Cloud project with BigQuery enabled
 
-1. Python + virtual environment
-
+<h2>Python and virtual environment</h2>
+```python
 pyenv install 3.12.0
 python -m venv .venv
 .venv\Scripts\Activate.ps1     # PowerShell (Windows)
+```
 
-2. Install the package + dev dependencies
-
+<h2>Install the package and dev dependencies</h2>
+```python
 pip install -e ".[dev]"
+```
 
-3. One-time: download the VADER lexicon
-
+<h2>One-time: download the VADER lexicon</h2>
+```python
 python -c "import nltk; nltk.download('vader_lexicon')"
+```
 
 # Credentials
 - Cloudflare R2
@@ -183,16 +184,19 @@ python -c "import nltk; nltk.download('vader_lexicon')"
 - Google Cloud
   - Uses Application Default Credentials (no JSON key file)
 
+```bash
 gcloud auth application-default login
 gcloud config set project <your-project-id>
 gcloud auth application-default set-quota-project <your-project-id>
+```
 
 # Running the pipeline
 The pipeline runs as a monthly batch, one stage at a time:
-
+```python
 python -m market_sentiment.acquisition.main   # fetch -> R2
 python -m market_sentiment.etl.main           # R2 -> validate -> score -> BigQuery
 python -m market_sentiment.export.main        # BigQuery -> dashboard/data/*.json
+```
 
 Then open dashboard/index.html locally, or visit the deployed GitHub Pages URL.
 
@@ -205,13 +209,13 @@ Then open dashboard/index.html locally, or visit the deployed GitHub Pages URL.
 - Static JSON export over a backend
     - The monthly cadence means a snapshot is never meaningfully
     stale, so there's no reason to pay for a live API
-    - Benefits: free hosting, no DB credentials in the browser, and a trivially cacheable dashboard.
+    - Benefits: free hosting, no DB credentials in the browser, and a trivially cacheable dashboard
 - Monthly batch over streaming
     - The analytical question ("how is sentiment trending") doesn't need
     sub-day freshness, and batches are simpler, cheaper, and easier to reason about
 - Staging table and MERGE for idempotency
     - BigQuery doesn't enforce primary keys, so re-runnability is
-    enforced in code, and re-processing the same R2 data is no-op.
+    enforced in code, and re-processing the same R2 data is no-op
 - ADC over service-account JSON keys
     - New GCP orgs block JSON key creation by default, and JSON keys
     are the most-leaked cloud credential
@@ -222,16 +226,17 @@ Then open dashboard/index.html locally, or visit the deployed GitHub Pages URL.
 
 # Roadmap
 - Sentiment-vs-price correlation
-- Join tone against price movements to close the loop on the original motivating question.
+    - Join tone against price movements to close the loop on the original motivating question.
 - Lift-weighted network edges
-- Weight ticker–topic edges by lift, not raw count, to surface distinctive associations.
+    - Weight ticker–topic edges by lift, not raw count, to surface distinctive associations.
 - Emotion radar
-- Add an emotion lexicon for a true emotion (not valence) breakdown.
+    - Add an emotion lexicon for a true emotion (not valence) breakdown.
 - Parquet in the lake
-- Switch R2 storage from JSON to parquet once volume justifies it.
+    - Switch R2 storage from JSON to parquet once volume justifies it.
 
 # Code quality
-- PEP 8 enforced via Ruff (lint and format); Google-style docstrings.
+- PEP 8 enforced via Ruff (lint and format)
+- Google-style docstrings
 - Installable src/ package 
-    — pip install -e ".[dev]" pulls runtime + dev deps from a single pyproject.toml
+    — `pip install -e ".[dev]"` pulls runtime and dev deps from a single pyproject.toml
 - Tests are collected from tests/
