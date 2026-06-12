@@ -1,0 +1,641 @@
+{
+  "nodes": [
+    {
+      "id": "AMZN",
+      "type": "ticker",
+      "sentiment": 0.7010995034756702,
+      "volume": 1007
+    },
+    {
+      "id": "SOUN",
+      "type": "ticker",
+      "sentiment": 0.5854111111111112,
+      "volume": 9
+    },
+    {
+      "id": "CLBT",
+      "type": "ticker",
+      "sentiment": 0.6353648648648649,
+      "volume": 37
+    },
+    {
+      "id": "AAPL",
+      "type": "ticker",
+      "sentiment": 0.6436697267759564,
+      "volume": 915
+    },
+    {
+      "id": "GOOGL",
+      "type": "ticker",
+      "sentiment": 0.6995709213051823,
+      "volume": 1042
+    },
+    {
+      "id": "INSG",
+      "type": "ticker",
+      "sentiment": 0.5776027027027028,
+      "volume": 37
+    },
+    {
+      "id": "MSFT",
+      "type": "ticker",
+      "sentiment": 0.6786451666666666,
+      "volume": 1200
+    },
+    {
+      "id": "DT",
+      "type": "ticker",
+      "sentiment": 0.6950666666666666,
+      "volume": 75
+    },
+    {
+      "id": "manufacturing",
+      "type": "topic",
+      "sentiment": 0.7004011764705883,
+      "volume": 255
+    },
+    {
+      "id": "blockchain",
+      "type": "topic",
+      "sentiment": 0.4441868852459016,
+      "volume": 61
+    },
+    {
+      "id": "economy_fiscal",
+      "type": "topic",
+      "sentiment": 0.6714850746268657,
+      "volume": 67
+    },
+    {
+      "id": "economy_macro",
+      "type": "topic",
+      "sentiment": 0.6366068389057751,
+      "volume": 658
+    },
+    {
+      "id": "mergers_and_acquisitions",
+      "type": "topic",
+      "sentiment": 0.65344496124031,
+      "volume": 258
+    },
+    {
+      "id": "finance",
+      "type": "topic",
+      "sentiment": 0.679769387755102,
+      "volume": 1274
+    },
+    {
+      "id": "real_estate",
+      "type": "topic",
+      "sentiment": 0.7311416666666667,
+      "volume": 72
+    },
+    {
+      "id": "AKAM",
+      "type": "ticker",
+      "sentiment": 0.6471401234567901,
+      "volume": 162
+    },
+    {
+      "id": "RMBS",
+      "type": "ticker",
+      "sentiment": 0.5427641791044776,
+      "volume": 67
+    },
+    {
+      "id": "technology",
+      "type": "topic",
+      "sentiment": 0.6771638101516149,
+      "volume": 4551
+    },
+    {
+      "id": "financial_markets",
+      "type": "topic",
+      "sentiment": 0.7052682216656231,
+      "volume": 3194
+    },
+    {
+      "id": "energy_transportation",
+      "type": "topic",
+      "sentiment": 0.7329538461538462,
+      "volume": 260
+    },
+    {
+      "id": "earnings",
+      "type": "topic",
+      "sentiment": 0.7253424759871929,
+      "volume": 2811
+    },
+    {
+      "id": "life_sciences",
+      "type": "topic",
+      "sentiment": 0.5842771028037381,
+      "volume": 214
+    },
+    {
+      "id": "ipo",
+      "type": "topic",
+      "sentiment": 0.44918000000000013,
+      "volume": 70
+    },
+    {
+      "id": "retail_wholesale",
+      "type": "topic",
+      "sentiment": 0.6799753846153846,
+      "volume": 390
+    },
+    {
+      "id": "economy_monetary",
+      "type": "topic",
+      "sentiment": 0.37314390243902446,
+      "volume": 82
+    }
+  ],
+  "links": [
+    {
+      "source": "AAPL",
+      "target": "earnings",
+      "value": 577
+    },
+    {
+      "source": "GOOGL",
+      "target": "earnings",
+      "value": 698
+    },
+    {
+      "source": "AAPL",
+      "target": "economy_macro",
+      "value": 133
+    },
+    {
+      "source": "INSG",
+      "target": "earnings",
+      "value": 22
+    },
+    {
+      "source": "INSG",
+      "target": "technology",
+      "value": 37
+    },
+    {
+      "source": "AAPL",
+      "target": "finance",
+      "value": 267
+    },
+    {
+      "source": "AAPL",
+      "target": "life_sciences",
+      "value": 36
+    },
+    {
+      "source": "DT",
+      "target": "technology",
+      "value": 75
+    },
+    {
+      "source": "GOOGL",
+      "target": "finance",
+      "value": 293
+    },
+    {
+      "source": "MSFT",
+      "target": "economy_macro",
+      "value": 191
+    },
+    {
+      "source": "AKAM",
+      "target": "earnings",
+      "value": 100
+    },
+    {
+      "source": "AKAM",
+      "target": "financial_markets",
+      "value": 113
+    },
+    {
+      "source": "RMBS",
+      "target": "financial_markets",
+      "value": 44
+    },
+    {
+      "source": "GOOGL",
+      "target": "ipo",
+      "value": 17
+    },
+    {
+      "source": "MSFT",
+      "target": "life_sciences",
+      "value": 64
+    },
+    {
+      "source": "AMZN",
+      "target": "life_sciences",
+      "value": 70
+    },
+    {
+      "source": "MSFT",
+      "target": "mergers_and_acquisitions",
+      "value": 65
+    },
+    {
+      "source": "AAPL",
+      "target": "energy_transportation",
+      "value": 24
+    },
+    {
+      "source": "DT",
+      "target": "finance",
+      "value": 22
+    },
+    {
+      "source": "AKAM",
+      "target": "finance",
+      "value": 31
+    },
+    {
+      "source": "SOUN",
+      "target": "earnings",
+      "value": 5
+    },
+    {
+      "source": "CLBT",
+      "target": "finance",
+      "value": 9
+    },
+    {
+      "source": "INSG",
+      "target": "financial_markets",
+      "value": 20
+    },
+    {
+      "source": "MSFT",
+      "target": "blockchain",
+      "value": 28
+    },
+    {
+      "source": "AAPL",
+      "target": "blockchain",
+      "value": 8
+    },
+    {
+      "source": "AKAM",
+      "target": "ipo",
+      "value": 2
+    },
+    {
+      "source": "AKAM",
+      "target": "retail_wholesale",
+      "value": 2
+    },
+    {
+      "source": "CLBT",
+      "target": "earnings",
+      "value": 26
+    },
+    {
+      "source": "AAPL",
+      "target": "technology",
+      "value": 915
+    },
+    {
+      "source": "AAPL",
+      "target": "financial_markets",
+      "value": 673
+    },
+    {
+      "source": "GOOGL",
+      "target": "technology",
+      "value": 1042
+    },
+    {
+      "source": "AMZN",
+      "target": "technology",
+      "value": 1007
+    },
+    {
+      "source": "AMZN",
+      "target": "finance",
+      "value": 249
+    },
+    {
+      "source": "MSFT",
+      "target": "retail_wholesale",
+      "value": 47
+    },
+    {
+      "source": "AMZN",
+      "target": "retail_wholesale",
+      "value": 246
+    },
+    {
+      "source": "DT",
+      "target": "financial_markets",
+      "value": 59
+    },
+    {
+      "source": "MSFT",
+      "target": "earnings",
+      "value": 720
+    },
+    {
+      "source": "AAPL",
+      "target": "manufacturing",
+      "value": 101
+    },
+    {
+      "source": "GOOGL",
+      "target": "economy_macro",
+      "value": 139
+    },
+    {
+      "source": "GOOGL",
+      "target": "manufacturing",
+      "value": 32
+    },
+    {
+      "source": "AMZN",
+      "target": "economy_macro",
+      "value": 179
+    },
+    {
+      "source": "MSFT",
+      "target": "manufacturing",
+      "value": 57
+    },
+    {
+      "source": "AKAM",
+      "target": "technology",
+      "value": 162
+    },
+    {
+      "source": "AAPL",
+      "target": "retail_wholesale",
+      "value": 42
+    },
+    {
+      "source": "AMZN",
+      "target": "real_estate",
+      "value": 28
+    },
+    {
+      "source": "AAPL",
+      "target": "real_estate",
+      "value": 6
+    },
+    {
+      "source": "DT",
+      "target": "earnings",
+      "value": 53
+    },
+    {
+      "source": "SOUN",
+      "target": "financial_markets",
+      "value": 7
+    },
+    {
+      "source": "AKAM",
+      "target": "economy_macro",
+      "value": 8
+    },
+    {
+      "source": "AAPL",
+      "target": "economy_fiscal",
+      "value": 17
+    },
+    {
+      "source": "CLBT",
+      "target": "technology",
+      "value": 37
+    },
+    {
+      "source": "CLBT",
+      "target": "financial_markets",
+      "value": 14
+    },
+    {
+      "source": "MSFT",
+      "target": "ipo",
+      "value": 20
+    },
+    {
+      "source": "MSFT",
+      "target": "real_estate",
+      "value": 21
+    },
+    {
+      "source": "GOOGL",
+      "target": "blockchain",
+      "value": 16
+    },
+    {
+      "source": "AMZN",
+      "target": "mergers_and_acquisitions",
+      "value": 65
+    },
+    {
+      "source": "GOOGL",
+      "target": "mergers_and_acquisitions",
+      "value": 41
+    },
+    {
+      "source": "AAPL",
+      "target": "economy_monetary",
+      "value": 14
+    },
+    {
+      "source": "AKAM",
+      "target": "mergers_and_acquisitions",
+      "value": 14
+    },
+    {
+      "source": "AMZN",
+      "target": "economy_fiscal",
+      "value": 12
+    },
+    {
+      "source": "GOOGL",
+      "target": "economy_monetary",
+      "value": 21
+    },
+    {
+      "source": "RMBS",
+      "target": "economy_macro",
+      "value": 3
+    },
+    {
+      "source": "DT",
+      "target": "mergers_and_acquisitions",
+      "value": 11
+    },
+    {
+      "source": "AKAM",
+      "target": "manufacturing",
+      "value": 2
+    },
+    {
+      "source": "AMZN",
+      "target": "economy_monetary",
+      "value": 16
+    },
+    {
+      "source": "AKAM",
+      "target": "blockchain",
+      "value": 2
+    },
+    {
+      "source": "GOOGL",
+      "target": "financial_markets",
+      "value": 750
+    },
+    {
+      "source": "AAPL",
+      "target": "mergers_and_acquisitions",
+      "value": 32
+    },
+    {
+      "source": "AMZN",
+      "target": "earnings",
+      "value": 573
+    },
+    {
+      "source": "AMZN",
+      "target": "financial_markets",
+      "value": 696
+    },
+    {
+      "source": "AMZN",
+      "target": "energy_transportation",
+      "value": 105
+    },
+    {
+      "source": "MSFT",
+      "target": "finance",
+      "value": 377
+    },
+    {
+      "source": "MSFT",
+      "target": "technology",
+      "value": 1200
+    },
+    {
+      "source": "MSFT",
+      "target": "financial_markets",
+      "value": 818
+    },
+    {
+      "source": "GOOGL",
+      "target": "retail_wholesale",
+      "value": 52
+    },
+    {
+      "source": "AMZN",
+      "target": "manufacturing",
+      "value": 61
+    },
+    {
+      "source": "RMBS",
+      "target": "technology",
+      "value": 67
+    },
+    {
+      "source": "RMBS",
+      "target": "earnings",
+      "value": 37
+    },
+    {
+      "source": "AAPL",
+      "target": "ipo",
+      "value": 14
+    },
+    {
+      "source": "GOOGL",
+      "target": "life_sciences",
+      "value": 41
+    },
+    {
+      "source": "MSFT",
+      "target": "energy_transportation",
+      "value": 59
+    },
+    {
+      "source": "SOUN",
+      "target": "technology",
+      "value": 9
+    },
+    {
+      "source": "AMZN",
+      "target": "blockchain",
+      "value": 7
+    },
+    {
+      "source": "INSG",
+      "target": "mergers_and_acquisitions",
+      "value": 26
+    },
+    {
+      "source": "GOOGL",
+      "target": "real_estate",
+      "value": 17
+    },
+    {
+      "source": "GOOGL",
+      "target": "energy_transportation",
+      "value": 71
+    },
+    {
+      "source": "INSG",
+      "target": "finance",
+      "value": 12
+    },
+    {
+      "source": "AMZN",
+      "target": "ipo",
+      "value": 17
+    },
+    {
+      "source": "GOOGL",
+      "target": "economy_fiscal",
+      "value": 19
+    },
+    {
+      "source": "MSFT",
+      "target": "economy_fiscal",
+      "value": 19
+    },
+    {
+      "source": "MSFT",
+      "target": "economy_monetary",
+      "value": 31
+    },
+    {
+      "source": "AKAM",
+      "target": "life_sciences",
+      "value": 3
+    },
+    {
+      "source": "RMBS",
+      "target": "finance",
+      "value": 11
+    },
+    {
+      "source": "RMBS",
+      "target": "manufacturing",
+      "value": 2
+    },
+    {
+      "source": "DT",
+      "target": "economy_macro",
+      "value": 5
+    },
+    {
+      "source": "SOUN",
+      "target": "mergers_and_acquisitions",
+      "value": 3
+    },
+    {
+      "source": "SOUN",
+      "target": "finance",
+      "value": 3
+    }
+  ]
+}
