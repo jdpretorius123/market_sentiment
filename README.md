@@ -46,7 +46,7 @@ flowchart TD
     BQ[("BigQuery<br/>(One Big Table — data warehouse)")] --> SQL("Aggregating SQL → Static JSON")
 
     %% Frontend / Dashboard
-    SQL --> D3{"D3.js Dashboard<br/>(HTML / CSS / JS, GitHub Pages)"}
+    SQL --> D3{"docs/ Directory<br/>(D3.js Dashboard, GitHub Pages)"}
 
     %% Visualizations
     D3 --> SG["Streamgraph<br/>(sentiment over time)"]
@@ -129,7 +129,7 @@ graph LR
     %% Level 1
     Root --- F1("📄 pyproject.toml<br/>(build config, deps, tool config)")
     Root --- Src["📁 src/market_sentiment/"]
-    Root --- Dash["📁 docs/<br/>(HTML / CSS / D3 front-end)"]
+    Root --- Docs["📁 docs/<br/>(HTML / CSS / D3 front-end)"]
     Root --- Tests["📁 tests/<br/>(pytest)"]
 
     %% Src contents
@@ -140,15 +140,15 @@ graph LR
     Src --- S5["📁 etl/<br/>(Phase 3 — R2 → validate → VADER → BigQuery)"]
     Src --- S6["📁 export/<br/>(Phase 4 — BigQuery → static JSON)"]
 
-    %% Dashboard contents
-    Dash --- D1("📄 index.html")
-    Dash --- D2["📁 css/"]
+    %% Docs contents
+    Docs --- D1("📄 index.html")
+    Docs --- D2["📁 css/"]
     D2 --- D2A("📄 style.css")
-    Dash --- D3["📁 js/"]
+    Docs --- D3["📁 js/"]
     D3 --- D3A("📄 streamgraph.js")
     D3 --- D3B("📄 radar.js")
     D3 --- D3C("📄 network.js")
-    Dash --- D4["📁 data/"]
+    Docs --- D4["📁 data/"]
     D4 --- D4A("📄 *.json<br/>(exported chart data)")
 ```
 
