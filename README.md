@@ -1,7 +1,7 @@
 # Market Sentiment and Real-Time Finanical Intelligence
 *An end-to-end pipeline that turns financial news, received as raw API payloads, into an interactive D3.js dashboard that gives a glance at how the market is perceiving tech stocks.*
 
-(Live dashboard)(https://jdpretorius123.github.io/financial_portfolio/market_sentiment/dashboard/)
+[Live dashboard](https://jdpretorius123.github.io/financial_portfolio/market_sentiment/dashboard/)
 
 # Overview
 Financial-news articles are a great source of data! Volume and tone of coverage can be used to determine how the market is talking about a company at a given moment. This project ingests financial-news for tech stocks, scores the tone of every article, and compiles the results into interactive visualizations that answer:
@@ -115,7 +115,7 @@ The warehouse is modeled as a single denormalized "One Big Table" (OBT), article
 | topics | RECORD <topic, relevance_score> | REPEATED | Alpha Vantage only |
 | vader_compound / _pos / _neu / _neg | FLOAT64 | REQUIRED | VADER scores |
 
-<h2>Idempotency</h2>
+<h3>Idempotency</h3>
 Loads are not naive inserts. Each batch lands in a uniquely named staging table, then a MERGE on row_id inserts only rows the target doesn't already have, so re-running the same month never
 duplicates data. BigQuery does not enforce primary keys, so this is enforced explicitly in the
 loader.
@@ -153,24 +153,27 @@ graph LR
 ```
 
 # Setup
-<h2>Prerequisites</h2>
+## Prerequisites
 - Python 3.12.0 (via pyenv)
 - Cloudflare R2 bucket 
 - Google Cloud project with BigQuery enabled
 
-<h2>Python and virtual environment</h2>
+### Python and virtual environment
+
 ```python
 pyenv install 3.12.0
 python -m venv .venv
 .venv\Scripts\Activate.ps1     # PowerShell (Windows)
 ```
 
-<h2>Install the package and dev dependencies</h2>
+### Install the package and dev dependencies
+
 ```python
 pip install -e ".[dev]"
 ```
 
-<h2>One-time: download the VADER lexicon</h2>
+### One-time: download the VADER lexicon
+
 ```python
 python -c "import nltk; nltk.download('vader_lexicon')"
 ```
@@ -240,3 +243,9 @@ Then open dashboard/index.html locally, or visit the deployed GitHub Pages URL.
 - Installable src/ package 
     — `pip install -e ".[dev]"` pulls runtime and dev deps from a single pyproject.toml
 - Tests are collected from tests/
+
+# Contact
+- [GitHub](https://github.com/jdpretorius123)
+- [X](https://x.com/jdpretorius_)
+- [LinkedIn](https://www.linkedin.com/in/justin-p-996555172/)
+- [Email](mailto:justin2025@gmail.com)
