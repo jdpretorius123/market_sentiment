@@ -19,17 +19,15 @@ import * as d3 from "https://cdn.jsdelivr.net/npm/d3@7/+esm";
       const innerHeight = svgHeight - margin.top - margin.bottom;
 
       // Building an x-domain that anchors at zero and tolerates a future negative net
-      const maxAbs = d3.max(data, d => Math.abs(d.net));
-      const minNet = d3.min(data, d => d.net);
-      const xLow = Math.min(0, minNet);
-      const xHigh = Math.max(0, maxAbs);
-      const xPad = (xHigh - xLow) * 0.1 || 0.01;
+     const [dataMin, dataMax] = d3.extent(data, d => d.net);
+     const xPad = (dataMax - dataMin) * 0.1 || 0.01;
+     const xLow = dataMin - xPad;
+     const xHigh = dataMax + xPad;
 
       // Establishing the scales
       const xScale = d3.scaleLinear()
-          .domain([xLow - (xLow < 0 ? xPad : 0), xHigh + xPad])
-          .range([0, innerWidth])
-          .nice();
+          .domain([xLow, xHigh])
+          .range([0, innerWidth]);
 
       const yScale = d3.scaleBand()
           .domain(data.map(d => d.ticker))
@@ -66,16 +64,6 @@ import * as d3 from "https://cdn.jsdelivr.net/npm/d3@7/+esm";
           .style("stroke", "#eee")
           .style("stroke-width", "1px");
 
-      // Drawing the baseline at x = 0
-      plot.append("line")
-          .attr("class", "zero-line")
-          .attr("x1", xScale(0))
-          .attr("x2", xScale(0))
-          .attr("y1", 0)
-          .attr("y2", innerHeight)
-          .style("stroke", "#999")
-          .style("stroke-width", "1.5px");
-
       // Drawing the x-axis
       plot.append("g")
           .attr("class", "x-axis")
@@ -106,8 +94,8 @@ import * as d3 from "https://cdn.jsdelivr.net/npm/d3@7/+esm";
       // Drawing the stems, growing them out from x(0) on entrance
       rows.append("line")
           .attr("class", "stem")
-          .attr("x1", xScale(0))
-          .attr("x2", xScale(0))
+          .attr("x1", xScale(xLow))
+          .attr("x2", xScale(xLow))
           .attr("y1", 0)
           .attr("y2", 0)
           .style("stroke", d => d.net >= 0 ? colorPos : colorNeg)
@@ -119,7 +107,7 @@ import * as d3 from "https://cdn.jsdelivr.net/npm/d3@7/+esm";
       // Drawing the dots, fading and sliding them to their final position
       rows.append("circle")
           .attr("class", "dot")
-          .attr("cx", xScale(0))
+          .attr("cx", xScale(xLow))
           .attr("cy", 0)
           .attr("r", 6)
           .style("fill", d => d.net >= 0 ? colorPos : colorNeg)
@@ -132,7 +120,7 @@ import * as d3 from "https://cdn.jsdelivr.net/npm/d3@7/+esm";
       // Labeling each dot with its formatted net value
       rows.append("text")
           .attr("class", "value-label")
-          .attr("x", xScale(0))
+          .attr("x", xScale(xLow))
           .attr("y", 0)
           .attr("dy", "-0.8em")
           .attr("text-anchor", "middle")
