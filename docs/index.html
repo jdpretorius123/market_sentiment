@@ -12,9 +12,7 @@
   <body>
     <header>
       <h1>Market Sentiment &amp; Real-Time Financial Intelligence</h1>
-      <p>This portfolio project uses data from Alpha Vantage and NewsAPI
-        to track the past and current market sentiment of 10 tech stocks:
-      </p>
+      <p>This portfolio project uses data from Alpha Vantage and NewsAPI to track the past and current market sentiment of 10 tech stocks:</p>
       
       <ul>
         <li>MSFT</li>
@@ -29,23 +27,7 @@
         <li>INSG</li>
       </ul>
       
-      <p>
-        This project is an end-to-end market-sentiment pipeline that ingests financial news from the Alpha
-        Vantage and NewsAPI REST APIs, lands the raw JSON in a Cloudflare R2 data lake, then transforms it
-        through a Python ETL stage that validates every payload with pydantic, scores tone with VADER, and
-        deduplicates records before loading them into a BigQuery warehouse. The warehouse is modeled as a
-        single denormalized "One Big Table" with nested fields, which lets the analytical queries run without
-        joins and keeps loads idempotent via a staging-table MERGE, so re-running a monthly batch never
-        duplicates data. The codebase is organized as an installable src/ Python package with clean separation
-        of concerns (distinct acquisition, ETL, and export stages sitting on shared leaf layers for storage
-        I/O, data-contract schemas, and config) so each phase is independently testable and the dependencies
-        flow in one direction. The final stage aggregates the warehouse into small static JSON files that a
-        D3.js dashboard renders as three interactive visualizations: a streamgraph of sentiment over time,
-        a net-sentiment lollipop chart ranking each company's tone, and a force-directed graph of
-        ticker-to-topic relationships. The result is a GitHub-Pages-hostable dashboard that turns thousands 
-        of raw news articles into a clear, at-a-glance read on how the market is talking about a select set 
-        of tech stocks.  
-      </p>
+      <p>This project is an end-to-end market-sentiment pipeline that ingests financial news from the Alpha Vantage and NewsAPI REST APIs, lands the raw JSON in a Cloudflare R2 data lake, then transforms it through a Python ETL stage that validates every payload with pydantic, scores tone with VADER, and deduplicates records before loading them into a BigQuery warehouse. The warehouse is modeled as a single denormalized "One Big Table" with nested fields, which lets the analytical queries run without joins and keeps loads idempotent via a staging-table MERGE, so re-running a monthly batch never duplicates data. The codebase is organized as an installable src/ Python package with clean separation of concerns (distinct acquisition, ETL, and export stages sitting on shared leaf layers for storage I/O, data-contract schemas, and config) so each phase is independently testable and the dependencies flow in one direction. The final stage aggregates the warehouse into small static JSON files that a D3.js dashboard renders as three interactive visualizations: a streamgraph of sentiment over time, a net-sentiment lollipop chart ranking each company's tone, and a force-directed graph of ticker-to-topic relationships. The result is a GitHub-Pages-hostable dashboard that turns thousands of raw news articles into a clear, at-a-glance read on how the market is talking about a select set of tech stocks.</p>
     </header>
     
     <main>
@@ -56,23 +38,17 @@
         <div id="streamgraph-legend"></div>
       </section>
       
-      <p>Band thickness is equal to the number of articles per day, colored by
-        <span class="pos">positive</span>, <span class="neu">neutral</span>, and
-        <span class="neg">negative</span> tone.
-      </p>
+      <p>Band thickness is equal to the number of articles per day, colored by <span class="pos">positive</span>, <span class="neu">neutral</span>, and <span class="neg">negative</span> tone.</p>
 
       <h2>Net Sentiment by Company</h2> 
       <section><div id="lollipop-chart"></div></section>
       
-      <p>Each lollipop shows a company's <strong>net sentiment</strong> &mdash; the share of <span class="pos">positive</span>
-        coverage minus <span class="neg">negative</span> coverage. Companies are ranked from most net-positive at the top.</p>
+      <p>Each lollipop shows a company's <strong>net sentiment</strong>, which is the share of <span class="pos">positive</span> coverage minus <span class="neg">negative</span> coverage. Companies are ranked from most net-positive at the top.</p>
 
       <h2>Ticker-to-topic relationships</h2>
       <section><div id="network-chart"></div></section>
 
-      <p>Edges link a company to topics; node size is equal to article volume and color is equal to average
-        sentiment.
-      </p>
+      <p>Edges link a company to topics; node size is equal to article volume and color is equal to average sentiment.</p>
 
     </main>
 

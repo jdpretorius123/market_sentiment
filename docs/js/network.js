@@ -191,7 +191,7 @@ d3.json("data/network_data.json").then(data => {
         .attr("y", 30)
         .attr("text-anchor", "start")
         .attr("font-size", "10px")
-        .text("Negative (-1)");
+        .text("Negative\n(-1)");
 
     // Adding the Neutral label
     colorLegendGroup.append("text")
@@ -199,7 +199,7 @@ d3.json("data/network_data.json").then(data => {
         .attr("y", 30)
         .attr("text-anchor", "middle")
         .attr("font-size", "10px")
-        .text("Neutral (0)");
+        .text("Neutral\n(0)");
 
     // Adding the Positive label
     colorLegendGroup.append("text")
@@ -207,13 +207,13 @@ d3.json("data/network_data.json").then(data => {
         .attr("y", 30)
         .attr("text-anchor", "end")
         .attr("font-size", "10px")
-        .text("Positive (1)");
+        .text("Positive\n(1)");
 
     // Defining volume values for the size legend
     const sizeData = [
-        { value: 100, label: "Low Volume"},
-        { value: 1000, label: "Mid Volume"},
-        { value: 5000, label: "High Volume" }
+        { value: 100, label: "Low\nVolume"},
+        { value: 1000, label: "Mid\nVolume"},
+        { value: 5000, label: "High\nVolume" }
     ];
 
     // Creating a group for the size legend
