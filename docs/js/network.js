@@ -30,7 +30,8 @@ d3.json("data/network_data.json").then(data => {
     // The size scale conveys volume
     const sizeScale = d3.scaleSqrt()
         .domain(d3.extent(data.nodes, d => d.volume))
-        .range([4, 30]);
+        .range([4, 30])
+        .clamp(true);
 
     // The link width scale conveys value
     const linkWidthScale = d3.scaleLinear()
@@ -181,7 +182,7 @@ d3.json("data/network_data.json").then(data => {
     
     // Draws the legend and fills it with the color gradient
     colorLegendGroup.append("rect")
-        .attr("width", 150)
+        .attr("width", 200)
         .attr("height", 15)
         .attr("fill", "url(#sentiment-gradient)");
 
@@ -191,29 +192,29 @@ d3.json("data/network_data.json").then(data => {
         .attr("y", 30)
         .attr("text-anchor", "start")
         .attr("font-size", "10px")
-        .text("Negative\n(-1)");
+        .text("Negative (-1)");
 
     // Adding the Neutral label
     colorLegendGroup.append("text")
-        .attr("x", 75)
+        .attr("x", 100)
         .attr("y", 30)
         .attr("text-anchor", "middle")
         .attr("font-size", "10px")
-        .text("Neutral\n(0)");
+        .text("Neutral (0)");
 
     // Adding the Positive label
     colorLegendGroup.append("text")
-        .attr("x", 150)
+        .attr("x", 200)
         .attr("y", 30)
         .attr("text-anchor", "end")
         .attr("font-size", "10px")
-        .text("Positive\n(1)");
+        .text("Positive (1)");
 
     // Defining volume values for the size legend
     const sizeData = [
-        { value: 100, label: "Low\nVolume"},
-        { value: 1000, label: "Mid\nVolume"},
-        { value: 5000, label: "High\nVolume" }
+        { value: 100, label: "Low"},
+        { value: 1000, label: "Mid"},
+        { value: 4500, label: "High" }
     ];
 
     // Creating a group for the size legend
@@ -226,7 +227,7 @@ d3.json("data/network_data.json").then(data => {
         .data(sizeData)
         .join("g")
             .attr("class", "size-item")
-            .attr("transform", (d, i) => `translate(${i * 100}, 0)`);
+            .attr("transform", (d, i) => `translate(${i * 140}, 0)`);
 
     // Appending a circle to each size item group
     sizeItem.append("circle")
@@ -237,8 +238,9 @@ d3.json("data/network_data.json").then(data => {
 
     // Appending a text label next to each legend circle
     sizeItem.append("text")
-        .attr("x", d => sizeScale(d.value) + 10) // Moves the text to the right of the circle
+        .attr("x", d => sizeScale(d.value) + 8) // Moves the text to the right of the circle
         .attr("y", 4) // Centers the text vertically with the circle
+        .attr("dominant-baseline", "middle")
         .attr("font-size", "10px")
         .text(d => d.label);
 
