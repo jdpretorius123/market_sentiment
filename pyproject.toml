@@ -7,6 +7,7 @@ name = "market-sentiment"
 version = "0.1.0"
 dependencies = [
     "boto3>=1.43.5",
+    "boto3-stubs[s3]",
     "google-cloud-bigquery>=3.41.0",
     "nltk>=3.9.4",
     "pandas>=3.0.2",

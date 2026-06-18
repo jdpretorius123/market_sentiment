@@ -21,6 +21,11 @@ Three small-cap tickers:
 
 The data for each ticker spans a month. An HTTP helper file
 (storage/r2_uploader.py) loads the data into R2.
+
+Functions:
+    fetch_ticker(): Fetch news sentiment data for one ticker.
+    fetch_all_tickers(): Fetch news sentiment data for all tickers.
+    config_newsapi_call(): Configure the NewsAPI API call.
 """
 
 import os

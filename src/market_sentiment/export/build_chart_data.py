@@ -101,7 +101,7 @@ def prep_lollipop(
 ) -> list[dict[str, Any]]:
     """Prepares data for a lollipop chart.
 
-    Each company's net sentiment is calculated by subtracting negative coverage from 
+    Each company's net sentiment is calculated by subtracting negative coverage from
     positive coverage. Net sentiment is used to create a lollipop chart downstream.
 
     Args:
